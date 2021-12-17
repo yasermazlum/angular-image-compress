@@ -1,6 +1,12 @@
 <div>
   <input class="btn" id="inputImage" type="file" accept="image/*" (change)="onChange($event)" multiple />
+  <div *ngIf="loading" class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  
 </div>
+
+
 
 <div class="container px-4">
   <b *ngIf="showTitle">Orjinal resimler</b>
@@ -8,7 +14,8 @@
     <div *ngFor="let item of processedImages">
       <div class="col">
         <div class="p-3 border bg-light">
-          <img src="{{item.imageDataUrl}}" height="80" width="100">
+          <img src="{{item.file.imageDataUrl}}" height="80" width="100"><br />
+          <label for="">{{item.file.fileName}}</label>
         </div>
       </div>
     </div>
@@ -22,12 +29,12 @@
     <div *ngFor="let item of processedImages">
       <div class="col">
         <div class="p-3 border bg-light">
-          <img src="{{item.compressedImage.imageDataUrl}}" height="80" width="100">
+          <a href="{{item.file.compressedImage.imageDataUrl}}" download="{{item.file.compressedImage.fileName}}">
+            <img src="{{item.file.compressedImage.imageDataUrl}}" height="80" width="100"><br />
+            <label for="">{{item.file.compressedImage.fileName}}</label>
+          </a>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-
-
